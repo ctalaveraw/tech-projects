@@ -1,4 +1,4 @@
-# sentinal is enforcing that any created
+# sentinel is enforcing that any created
 # EC2 instance must have at least '1' tag applied
 
 import "tfplan"
