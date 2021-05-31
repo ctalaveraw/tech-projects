@@ -1,0 +1,48 @@
+## creating a mongodb container 
+## without docker compose
+
+docker run -d \ 
+# this runs in detached mode
+
+--name mongodb \
+# this names the container 'mongodb'
+
+-p 27017:27017 \
+# this binds the ports
+
+-e MONGO-INITDB_ROOT_USERNAME=admin \ 
+# this defines the username as an enviornmental variable
+
+-e MONGO-INITDB_ROOT_PASSWORD=password \
+# this defines the password as a enviornmental variable
+
+--net mongo-network \
+# this creates a network called 'mongo-network' for the container 
+
+mongo
+# the container is created from this image
+
+
+
+## creating the same container with a .YAML
+## docker compose file
+
+
+version: '3' # this is the version of docker-compose being used
+services: # the name(s) of each container to be created
+    mongodb: 
+        image: mongo # the image where the container will be created from
+        ports: # the port binding; format is HOSTPORT:CONTAINERPORT
+            -27017:27017 
+        environment: # any environmental variables are declared here
+            -MONGO-INITDB_ROOT_USERNAME=admin
+            -MONGO-INITDB_ROOT_PASSWORD=password
+    mongo-express:
+        image: mongo-express
+        ports:
+            -8080:8080
+            environment:
+            -ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+            -ME_CONFIG_MONGODB_ADMINPASSWORD=password
+            -ME_CONFIG_MONGODB_SERVER=mongodb
+        
