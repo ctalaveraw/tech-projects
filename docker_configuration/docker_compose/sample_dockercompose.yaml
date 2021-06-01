@@ -19,9 +19,11 @@ docker run -d \
 --net mongo-network \
 # this creates a network called 'mongo-network' for the container 
 
-mongo
+mongo \
 # the container is created from this image
 
+-v mongo-data:/var/lib/mysql/data
+# a named volume 'mongo-data' is created and mounted
 
 
 ## creating the same container with a .YAML
