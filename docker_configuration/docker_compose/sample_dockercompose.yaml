@@ -37,6 +37,8 @@ services: # the name(s) of each container to be created
         environment: # any environmental variables are declared here
             -MONGO-INITDB_ROOT_USERNAME=admin
             -MONGO-INITDB_ROOT_PASSWORD=password
+        volumes: # the mountpoint of any volumes used by this container are declared here
+            - mongo-data:/var/lib/mysql/data
     mongo-express:
         image: mongo-express
         ports:
@@ -45,4 +47,5 @@ services: # the name(s) of each container to be created
             -ME_CONFIG_MONGODB_ADMINUSERNAME=admin
             -ME_CONFIG_MONGODB_ADMINPASSWORD=password
             -ME_CONFIG_MONGODB_SERVER=mongodb
+volumes: mongo-data # any volumes that containers use are declared at the 'services' level
         
