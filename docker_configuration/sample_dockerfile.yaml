@@ -1,0 +1,37 @@
+# The custom image will be based on one
+# or more pre-existing images, which is 
+# defined by the 'FROM' statement.
+
+FROM node 
+
+# The 'ENV' statement contains any 
+# environmental variables that should
+# be defined in the image. However,
+# best practice is to declare
+# environmental variables in the
+# Docker Compose file.
+
+ENV MONGO_DB_USERNAME=admin \
+    MONGO_DB_PASSWORD=password
+
+# The 'RUN' statement allows for any
+# Linux command to be executed inside
+# the custom container.
+
+RUN mkdir -p /home/app
+
+# The 'COPY' statement is used if there
+# is a need for files from the host
+# enviornment that need to be copied
+# to the created container.
+
+COPY . /home/app
+
+# Once the base image and configuration
+# is chosen, the image is ready to be 
+# built. Afterwards, a "single" command
+# (such as starting a service) and any
+# arguments that the command should use
+# can be specified with the 'CMD' statement. 
+
+CMD [ "node", "server.js" ]
