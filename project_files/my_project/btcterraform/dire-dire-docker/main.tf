@@ -46,7 +46,7 @@ terraform {
 
 provider "docker" {}
 
-resource "docker_image" "dire-docker_nodered_base" {
+resource "docker_image" "dire-docker_nodered_baseimage1" {
   name = "nodered/node-red:latest"
 }
 
