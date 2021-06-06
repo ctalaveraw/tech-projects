@@ -51,8 +51,12 @@ resource "docker_image" "nodered_image_base" {
 }
 
 resource "docker_container" "ddd_nodeRED_container_1" {
-  name = "nodeRED_1"
+  name  = "nodeRED_1"
   image = docker_image.nodered_image_base.latest
+  ports {
+    internal = 1880
+    external = 1880
+  }
 }
 
 
