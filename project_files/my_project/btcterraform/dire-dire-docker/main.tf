@@ -46,9 +46,14 @@ terraform {
 
 provider "docker" {}
 
-resource "docker_image" "dire-docker_nodered_baseimage1" {
+resource "docker_image" "nodered_image_base" {
   name = "nodered/node-red:latest"
 }
 
+resource "docker_container" "ddd_nodeRED_container_1" {
+  name = "nodeRED_1"
+  image = docker_image.nodered_image_base.latest
+}
 
-## TERRAFORM APPLY @ 3:44
+
+## running `terraform apply` will download the latest "Node-RED" docker image
