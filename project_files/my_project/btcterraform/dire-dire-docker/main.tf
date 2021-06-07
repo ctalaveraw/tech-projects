@@ -58,6 +58,3 @@ resource "docker_container" "ddd_nodeRED_container_1" {
     external = 1880
   }
 }
-
-
-## running `terraform apply` will download the latest "Node-RED" docker image
