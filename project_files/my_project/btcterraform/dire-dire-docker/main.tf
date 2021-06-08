@@ -14,7 +14,7 @@ resource "docker_image" "nodered_image_base" {
 }
 
 resource "docker_container" "ddd_nodeRED_container_1" {
-  name  = "nodeRED_1"
+  name  = join("-", ["nodeRED", random_string.random_container_name.result])
   image = docker_image.nodered_image_base.latest
   ports {
     internal = 1880
@@ -22,12 +22,18 @@ resource "docker_container" "ddd_nodeRED_container_1" {
   }
 }
 
-output "IPv4_Address" { # this is an output variable to grab the container's IP
-  value = docker_container.ddd_nodeRED_container_1.ip_address
+output "container_socket" { # this is an output variable to grab the container's IP
+  value = join(":", [docker_container.ddd_nodeRED_container_1.ip_address, docker_container.ddd_nodeRED_container_1.ports[0].external])
   description = "The IPv4 address assigned to the running container"
 }
 
 output "container_name" { # this is an output variable to grab the container's assigned name
   value = docker_container.ddd_nodeRED_container_1.name
   description = "The assigned name of the created container"
+}
+
+resource "random_string" "random_container_name" {
+  length = 4
+  special = false
+  upper = false
 }
