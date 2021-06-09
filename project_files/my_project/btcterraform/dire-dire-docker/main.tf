@@ -1,8 +1,7 @@
 terraform {
   required_providers {
     docker = {
-      source  = "terraform-providers/docker"
-      version = "~> 2.7.2"
+      source  = "kreuzwerker/docker"
     }
   }
 }
@@ -33,15 +32,15 @@ output "container_1_socket" { # this is an output variable to grab the container
   description = "The IPv4 address assigned to the running container"
 }
 
-output "container_0_name" { # this is an output variable to grab the container's assigned name
-  value = docker_container.ddd_nodeRED_container_1[0].name
+output "container_name" { # this is an output variable to grab the container's assigned name
+  value = docker_container.ddd_nodeRED_container_1[*].name
   description = "The assigned name of the created container"
 }
 
-output "container_1_name" { # this is an output variable to grab the container's assigned name
-  value = docker_container.ddd_nodeRED_container_1[1].name
-  description = "The assigned name of the created container"
-}
+# output "container_1_name" { # this is an output variable to grab the container's assigned name
+#   value = docker_container.ddd_nodeRED_container_1[*].name
+#   description = "The assigned name of the created container"
+# }
 
 resource "random_string" "random_container_name" {
   count = 2
