@@ -3,7 +3,6 @@
 variable "container_port_internal" {
   type    = number
   default = 1880
-
   validation {
     condition     = var.container_port_internal == 1880
     error_message = "The external port number must be 1880."
