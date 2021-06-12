@@ -9,7 +9,6 @@ terraform {
 provider "docker" {}
 
 
-
 ## INFRASTRUCTURE RESOURCES
 
 resource "docker_image" "nodered_image_base" {

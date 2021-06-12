@@ -1,8 +1,13 @@
 ## VARIABLE BLOCK
 
+variable "container_count" {
+  type    = number
+}
+variable "container_name_length" {
+  type    = number
+}
 variable "container_port_internal" {
   type    = number
-  default = 1880
   validation {
     condition     = var.container_port_internal == 1880
     error_message = "The external port number must be 1880."
@@ -18,15 +23,5 @@ variable "container_port_internal" {
 #     error_message = "The external port number must be valid. Acceptable values are between 0 to 65535."
 #   }
 # }
-
-variable "container_count" {
-  type    = number
-  default = 2
-}
-
-variable "container_name_length" {
-  type    = number
-  default = 5
-}
 
 ## END VARIALE BLOCK
