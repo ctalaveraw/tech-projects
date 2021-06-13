@@ -12,7 +12,7 @@ provider "docker" {}
 
 resource "null_resource" "create_docker_volume_1" {
   provisioner = "local-exec" {
-    command = "mkdir ~/Documents/Development/git/git_repositories"
+    command = "mkdir /home/$USERNAME/Documents/Development/git/github_repositories/development/project_files/my_project/volumes && sudo chown -R 100:100"
   }
 }
 
