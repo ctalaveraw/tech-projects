@@ -9,4 +9,10 @@ output "container_socket" { # this is an output variable to grab the container's
   description = "The IPv4 address assigned to the running container, and external port, which is automatically assigned"
 }
 
+output "container_internal_port" { # this is an output variable to grab the container's IP
+  value       = docker_container.ddd_nodeRED_container_1[*].ports[*].internal
+  description = "The internal port of the created container"
+  sensitive = true
+}
+
 ## END OUTPUT BLOCK

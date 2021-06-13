@@ -2,12 +2,15 @@
 
 variable "container_count" {
   type    = number
+  sensitive = true
 }
 variable "container_name_length" {
   type    = number
+  sensitive = true
 }
 variable "container_port_internal" {
   type    = number
+  sensitive = true
   validation {
     condition     = var.container_port_internal == 1880
     error_message = "The external port number must be 1880."

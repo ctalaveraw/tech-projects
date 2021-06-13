@@ -8,6 +8,16 @@ terraform {
 
 provider "docker" {}
 
+## NULL-RESOUCES
+
+resource "null_resource" "create_docker_volume_1" {
+  provisioner = "local-exec" {
+    command = "mkdir ~/Documents/Development/git/git_repositories"
+  }
+}
+
+
+## END NULL RESOUCES
 
 ## INFRASTRUCTURE RESOURCES
 
