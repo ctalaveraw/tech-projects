@@ -1,9 +1,6 @@
 ## VARIABLE BLOCK
 
-variable "container_count" {
-  type    = number
-  sensitive = true
-}
+
 variable "container_name_length" {
   type    = number
   sensitive = true
@@ -17,10 +14,10 @@ variable "container_port_internal" {
   }
 }
 
-# variable "container_port_external" { # duplicate external ports on host not supported, so cannot be manually set
-#   type    = number
-#   default = 1880
-
+variable "container_port_external" { 
+  type    = list
+  sensitive = false
+}
 #   validation {
 #     condition     = var.container_port_external <= 65535 && var.container_port_external > 0
 #     error_message = "The external port number must be valid. Acceptable values are between 0 to 65535."
@@ -28,3 +25,11 @@ variable "container_port_internal" {
 # }
 
 ## END VARIALE BLOCK
+
+## BEGIN LOCALS BLOCK
+
+locals {
+  container_count = length(var.container_port_external)
+}
+
+## END LOCALS BLOCK

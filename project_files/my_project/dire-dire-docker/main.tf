@@ -11,8 +11,8 @@ provider "docker" {}
 ## NULL-RESOUCES
 
 resource "null_resource" "create_docker_volume_1" {
-  provisioner = "local-exec" {
-    command = "mkdir /home/$USERNAME/Documents/Development/git/github_repositories/development/project_files/my_project/volumes && sudo chown -R 100:100"
+  provisioner "local-exec" {
+    command = "mkdir /home/$USERNAME/Documents/Docker/volumes || true && chown -R 1000:1000 /home/$USERNAME/Documents/Docker/volumes"
   }
 }
 
@@ -25,12 +25,16 @@ resource "docker_image" "nodered_image_base" {
   name = "nodered/node-red:latest"
 }
 resource "docker_container" "ddd_nodeRED_container_1" {
-  count = var.container_count
+  count = local.container_count
   name  = join("-", ["nodeRED", random_string.random_container_name[count.index].result])
   image = docker_image.nodered_image_base.latest
   ports {
     internal = var.container_port_internal
-    # external = var.container_port_external # duplicate external ports on host not supported, so cannot be manually set
+    external = var.container_port_external[count.index]
+  }
+  volumes {
+    container_path = "/data"
+    host_path = "/home/pupp/Documents/Docker/volumes"
   }
 }
 ## END INFRASTRUCTURE RESOUCES
@@ -38,7 +42,7 @@ resource "docker_container" "ddd_nodeRED_container_1" {
 
 ## 'RANDOM' GENERATOR RESOURCES 
 resource "random_string" "random_container_name" {
-  count   = var.container_count
+  count   = local.container_count
   length  = var.container_name_length
   special = false
   upper   = false
