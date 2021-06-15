@@ -17,12 +17,12 @@ variable "container_port_internal" {
 variable "container_port_external" { 
   type    = list
   sensitive = false
+
+  validation {
+    condition     = max(var.container_port_external...) <= 65535 && min(var.container_port_external...) > 0
+    error_message = "The external port number must be valid. Acceptable values are between 0 to 65535."
+  }
 }
-#   validation {
-#     condition     = var.container_port_external <= 65535 && var.container_port_external > 0
-#     error_message = "The external port number must be valid. Acceptable values are between 0 to 65535."
-#   }
-# }
 
 ## END VARIALE BLOCK
 

@@ -10,9 +10,9 @@ provider "docker" {}
 
 ## NULL-RESOUCES
 
-resource "null_resource" "create_docker_volume_1" {
+resource "null_resource" "create_docker_volume_1" { #This creates a Docker volume in the working directory
   provisioner "local-exec" {
-    command = "mkdir /home/$USERNAME/Documents/Docker/volumes || true && chown -R 1000:1000 /home/$USERNAME/Documents/Docker/volumes"
+    command = "mkdir ${path.cwd}/Docker/volumes || true && sudo chown -R 1000:1000 ${path.cwd}/Docker/volumes"
   }
 }
 
@@ -34,7 +34,7 @@ resource "docker_container" "ddd_nodeRED_container_1" {
   }
   volumes {
     container_path = "/data"
-    host_path = "/home/pupp/Documents/Docker/volumes"
+    host_path = "${path.cwd}/Docker/volumes"
   }
 }
 ## END INFRASTRUCTURE RESOUCES
