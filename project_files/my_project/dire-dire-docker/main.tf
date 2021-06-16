@@ -12,7 +12,7 @@ provider "docker" {}
 
 resource "null_resource" "create_docker_volume_1" { #This creates a Docker volume in the working directory
   provisioner "local-exec" {
-    command = "mkdir ${path.cwd}/Docker/volumes || true && sudo chown -R 1000:1000 ${path.cwd}/Docker/volumes"
+    command = "mkdir ${path.cwd}/Docker/volumes || true && chown -R 1000:1000 ${path.cwd}/Docker/volumes"
   }
 }
 
@@ -22,15 +22,15 @@ resource "null_resource" "create_docker_volume_1" { #This creates a Docker volum
 ## INFRASTRUCTURE RESOURCES
 
 resource "docker_image" "app-nodered" {
-  name = lookup(var.source_docker_image_nodered, var.tf_project_env)
+  name = var.source_docker_image_nodered[terraform.workspace]
 }
 resource "docker_container" "ddd_nodeRED_container_1" {
   count = local.container_count
-  name  = join("-", ["nodeRED", random_string.random_container_name[count.index].result])
+  name  = join("-", ["nodeRED", terraform.workspace, random_string.random_container_name[count.index].result])
   image = docker_image.app-nodered.latest
   ports {
     internal = var.container_port_internal
-    external = lookup(var.container_port_external, var.tf_project_env)[count.index]
+    external = var.container_port_external[terraform.workspace][count.index]
   }
   volumes {
     container_path = "/data"

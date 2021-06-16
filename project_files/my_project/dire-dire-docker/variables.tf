@@ -1,11 +1,4 @@
 ## VARIABLE BLOCK
-
-variable "tf_project_env" {
-  type = string
-  description = "The 'Environment' that will be deployed to "
-  sensitive = false
-  default = "dev"
-}
 variable "source_docker_image_nodered" {
   type = map
   description = "NodeRED Docker image for container deployment"
@@ -44,7 +37,7 @@ variable "container_port_external" {
 ## BEGIN LOCALS BLOCK
 
 locals {
-  container_count = length(lookup(var.container_port_external, var.tf_project_env))
+  container_count = length(var.container_port_external[terraform.workspace])
 }
 
 ## END LOCALS BLOCK
