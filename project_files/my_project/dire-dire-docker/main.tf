@@ -21,16 +21,16 @@ resource "null_resource" "create_docker_volume_1" { #This creates a Docker volum
 
 ## INFRASTRUCTURE RESOURCES
 
-resource "docker_image" "nodered_image_base" {
-  name = "nodered/node-red:latest"
+resource "docker_image" "app-nodered" {
+  name = lookup(var.source_docker_image_nodered, var.tf_project_env)
 }
 resource "docker_container" "ddd_nodeRED_container_1" {
   count = local.container_count
   name  = join("-", ["nodeRED", random_string.random_container_name[count.index].result])
-  image = docker_image.nodered_image_base.latest
+  image = docker_image.app-nodered.latest
   ports {
     internal = var.container_port_internal
-    external = var.container_port_external[count.index]
+    external = lookup(var.container_port_external, var.tf_project_env)[count.index]
   }
   volumes {
     container_path = "/data"
