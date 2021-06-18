@@ -1,34 +1,21 @@
-## NULL-RESOUCES #### Removed for debugging
-# resource "null_resource" "create_docker_volume_1" { #This creates a Docker volume in the working directory
-#   provisioner "local-exec" {
-#     command = "mkdir ${path.cwd}/Docker/volumes || true && chown -R 1000:1000 ${path.cwd}/Docker/volumes"
-#   }
-# }
-
-
-## END NULL RESOUCES
-
-## INFRASTRUCTURE RESOURCES
+##DOCKER INFRASTRUCTURE MODULES
 
 module "docker-images" {
   source = "./docker-images"
   module_input_image_nodered = var.source_docker_image_nodered[terraform.workspace]
 }
-resource "docker_container" "ddd_nodeRED_container_1" {
+module "docker-containers" {
+  source = "./docker-containers"
   count = local.container_count
-  name  = join("-", ["nodeRED", terraform.workspace, random_string.random_container_name[count.index].result])
-  image = module.docker-images.module_output_image_nodered
-  ports {
-    internal = var.container_port_internal
-    external = var.container_port_external[terraform.workspace][count.index]
-  }
-#   volumes { ###### removing volume block for debugging
-#     container_path = "/data"
-#     host_path = "${path.cwd}/Docker/volumes"
-#   }
+  module_input_container_name  = join("-", ["nodeRED", terraform.workspace, random_string.random_container_name[count.index].result])
+  module_input_container_image = module.docker-images.module_output_image_nodered
+  module_input_container_ports_internal = var.container_port_internal
+  module_input_container_ports_external = var.container_port_external[terraform.workspace][count.index]
+  module_input_container_volumes_path_container = "/data"
+  module_input_container_volumes_path_host = "${path.cwd}/local_docker_files/volumes/nodered"
 }
-## END INFRASTRUCTURE RESOUCES
 
+## END MODULES
 
 ## 'RANDOM' GENERATOR RESOURCES 
 resource "random_string" "random_container_name" {
