@@ -13,4 +13,7 @@ resource "docker_container" "ddd_nodeRED_container_1" {
 
 resource "docker_volume" "docker_volume_nodered" {
   name = "${var.module_input_container_name}-volume"
+  lifecycle { #commenting this out for the time being
+    # prevent_destroy = true
+  }
 }
