@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"docker-images","Source":"./docker-images","Dir":"docker-images"},{"Key":"docker-containers","Source":"./docker-containers","Dir":"docker-containers"}]}
+{"Modules":[{"Key":"docker-image-nodered","Source":"./docker-images","Dir":"docker-images"},{"Key":"","Source":"","Dir":"."},{"Key":"docker-images","Source":"./docker-images","Dir":"docker-images"},{"Key":"docker-containers","Source":"./docker-containers","Dir":"docker-containers"},{"Key":"docker-image-influxdb","Source":"./docker-images","Dir":"docker-images"}]}

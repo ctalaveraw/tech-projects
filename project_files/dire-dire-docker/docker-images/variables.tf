@@ -1,3 +1,3 @@
-variable "module_input_image_nodered" {
-  description = "Input variable for name of Node-RED Docker image"
+variable "module_input_source_image_name" {
+  description = "Input variable for the download path of Docker image"
 }

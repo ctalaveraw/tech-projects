@@ -1,16 +1,16 @@
 ## VARIABLE BLOCK
-variable "source_docker_image_nodered" {
-  type        = map(any)
-  description = "NodeRED Docker image for container deployment"
-  sensitive   = false
+variable "source_docker_images" {
+  type = map
+  description = "Variable storing the source Docker images for container deployment"
+  sensitive = false
 }
 
 variable "container_name_length" {
-  type      = number
+  type    = number
   sensitive = false
 }
 variable "container_port_internal" {
-  type      = number
+  type    = number
   sensitive = false
   validation {
     condition     = var.container_port_internal == 1880
@@ -18,8 +18,8 @@ variable "container_port_internal" {
   }
 }
 
-variable "container_port_external" {
-  type      = map(any)
+variable "container_port_external" { 
+  type    = map
   sensitive = false
 
   validation { # validation for production environment

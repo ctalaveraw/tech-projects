@@ -1,3 +1,3 @@
-output "module_output_image_nodered" {
-    value = docker_image.app-nodered.latest
+output "module_output_source_image" {
+    value = docker_image.source_image.latest
 }
