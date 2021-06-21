@@ -14,14 +14,23 @@ source_docker_images = {
   }
 }
 
+
 ## variables for container attributes
 container_port_internal = 1880
+container_name_length   = 5
+
 container_port_external = {
-  dev     = [1979]
-  prod    = [1879]
-  testing = [9999]
-  default = [19999]
+  nodered = {
+    dev     = [1979]
+    prod    = [1879]
+    testing = [2079]
+    default = [10099]
+  }
+  influxdb = {
+    dev     = [2179]
+    prod    = [2279]
+    testing = [2399]
+    default = [10199]
+
+  }
 }
-container_name_length = 5
-
-
