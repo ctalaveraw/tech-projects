@@ -2,6 +2,7 @@
 ## are files involed with the Terraform project working directory.
 
 **/.terraform/*
+**/.terraform.*/*
 
 ## Terraform state files and their backups should not be included in the repo
 

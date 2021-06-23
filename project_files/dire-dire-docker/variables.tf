@@ -6,11 +6,11 @@ variable "source_docker_images" {
 }
 
 variable "container_name_length" {
-  type      = number
   sensitive = false
 }
 variable "container_port_internal" {
   sensitive = false
+
   #   validation {
   #     condition     = var.container_port_internal == 1880
   #     error_message = "The external port number must be 1880."
@@ -32,13 +32,6 @@ variable "container_port_external" {
 
 ## END VARIALE BLOCK
 
-## BEGIN LOCALS BLOCK
-
-# locals {
-#   container_count = length(var.container_port_external[terraform.workspace])
-# }
-
-# ## END LOCALS BLOCK
 
 
  
