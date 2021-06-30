@@ -28,7 +28,7 @@ locals {
       internal_port    = var.container_port_internal["grafana"][terraform.workspace]
       external_port    = var.container_port_external["grafana"][terraform.workspace]
       name_length      = var.container_name_length
-      # volume_path_container   = "/var/lib/grafana"
+      volume_path_container   = "/var/lib/grafana"
       volume_path_container = [
         { path_container_each = "/var/lib/grafana" },
         { path_container_each = "/etc/granfana" }

@@ -35,7 +35,7 @@ resource "docker_container" "container-app-1" {
 
 resource "docker_volume" "volume-app-1" {
   count = length(var.module_input_volume_path_container)
-  name  = "${var.module_input_container_name}-${count.index}.result-volume"
+  name  = "${var.module_input_container_name}-${count.index}-volume"
   lifecycle {
     prevent_destroy = false
   }
