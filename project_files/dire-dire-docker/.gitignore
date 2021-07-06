@@ -1,0 +1,23 @@
+## These files will be ignored by GitHub, because they 
+## are files involed with the Terraform project working directory.
+
+**/.terraform/*
+**/.terraform.*/*
+
+## Terraform state files and their backups should not be included in the repo
+
+*.tfstate
+*.tfstate.*
+
+
+## All .tfvars files, which usually contains sentitive data, should not be
+## included in the repo. These contains secrets, passwords, keys,
+## sensitive info, etc.
+## They are subject to change, and should not be included anyways.
+*.tfvars
+
+## Log files should also be ignored.
+*.log
+
+## Any locks that Terraform creates during project work should be ignored.
+*.terraform.lock.*
