@@ -1,10 +1,10 @@
-Deploying NGINX with Ansible
+05 - Deploying NGINX with Ansible
 
 As an example of Ansible in action, NGINX can be deployed using a Ansible Playbook. A configuration can be declared using the modules in a Playbook.
 
 Steps will be spelled out on how NGINX will be deployed, on all relevant servers, using a Playbook written in YAML named `playbook_nginx_install.yaml` :
 
-```
+```bash
 $ nano playbook_nginx_install.yaml
 ```
 
@@ -12,9 +12,9 @@ The YAML file starts with three dashes --- starting the first `block.`
 
 Nested one level, as indicated by a dash `-` within the `block` is the `hosts:` statement, representing the server grouping for the Playbook to target, which would be the group `local`  in this example, containing only `localhost`.
 
-Another nested statement within the `block` is the `become:` statement, indicating on if this task will run with elevated privileges; in this case the task is installing an application, so it would need elevated privileges to run properly and needs the value to be set as `true` : 
+Another nested statement within the `block` is the `become:` statement, indicating on if this task will run with elevated privileges; in this case the task is installing an application, so it would need elevated privileges to run properly and needs the value to be set as `true` :
 
-```
+```YAML
 ---
 - hosts: local
   become: true
@@ -43,7 +43,7 @@ The same thing can be repeated for the `service` module, which will start the NG
 
 Nested within the service module is the `name:` statement, representing the application needing to be manipulated; the `state:` statement represents the action to be performed, in this case to start the service, the value will be set to started:
 
-```
+```YAML
 ---
 - hosts: local
   become: true
@@ -60,7 +60,7 @@ Nested within the service module is the `name:` statement, representing the app
 
 Running the Playbook demonstrates that the install of NGINX is successful:
 
-```
+```bash
 $ sudo ansible-playbook playbook_nginx_install.yaml --connection=local
 
 PLAY [local] ****************************************************************************************************
@@ -80,7 +80,7 @@ PLAY RECAP *********************************************************************
 
 Since Ansible is idempotent, running the Playbook again will perform no changes:
 
-```
+```bash
 $ sudo ansible-playbook playbook_nginx_install.yaml --connection=local
 
 PLAY [local] ****************************************************************************************************
@@ -102,7 +102,7 @@ Based on the created `playbook_nginx_install.yaml` Playbook, a version can be c
 
 The NGINX service will be stopped, and the application installed; the other Playbook's content is listed below:
 
-```
+```YAML
 ---
 - hosts: local
   become: true
@@ -119,7 +119,7 @@ The NGINX service will be stopped, and the application installed; the other Play
 
 Running the Playbook demonstrates that the NGINX application is successfully removed:
 
-```
+```bash
 $ sudo ansible-playbook playbook_nginx_uninstall.yaml --connection=local
 
 PLAY [local] ****************************************************************************************************
