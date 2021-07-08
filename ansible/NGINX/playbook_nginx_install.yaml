@@ -1,0 +1,12 @@
+---
+- hosts: local
+  become: true
+  tasks:
+    - name: Install the NGINX application on localhost
+      yum:
+        name: nginx
+        state: present
+    - name: Start the NGINX service
+      service:
+        name: nginx
+        state: started
