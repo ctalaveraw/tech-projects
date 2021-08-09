@@ -10,5 +10,5 @@ convert_km_to_mi = 0.621371
 
 # The "miles" variable is declared, and the calculation is performed.
 mi = km * convert_km_to_mi
-# The output is shown to the user.
+# The output is shown to the user, up to two decimal places.
 print('You entered %0.2f kilometers, which equals %0.2f miles' %(km,mi))
