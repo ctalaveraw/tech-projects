@@ -1,0 +1,31 @@
+# # This is the GitLab CI/CD configuration file for this project.
+
+# # The 'stages' block defines each stage in the pipeline.
+# stages: # This block will have each pipeline stage nested in.
+#     - build
+#     - test
+
+# # This block will have represent the 'build' stage.
+# build:
+#     stage: build # This explicitly defines the stage, in this case 'build'.
+#     script: # A 'script' statement has the commands to be run nested within.
+#         - echo 'Pipeline Stage - Building' # Display a status message on screen.
+#         - mkdir build # Create a directory called "build".
+#         - touch build/info.txt # Create a file named info.txt in the "build" directory.
+#     artifacts:
+#         paths:
+#             - build/
+
+# # This block will represent the 'test' stage.
+# test:
+#     stage: test # This explicitly defines the stage, in this case 'test'.
+#     script: # A 'script' statement has the commands to be run nested within.
+#         - echo 'Pipeline Stage - Testing' # Display a status message on screen.
+#         - test -f 'build/info.txt' # This will test the recently created file
+
+
+
+# The 'stages' block defines each stage in the pipeline.
+stages: # This block will have each pipeline stage nested in.
+    - build
+    - test
