@@ -1,3 +1,4 @@
+
 ## Program to calculate completion percentage of a quarterback
 ## Stitched together by: gtihub.com/ctalaveraw
 
@@ -35,14 +36,15 @@ def calc_completion_percent(completion, attempt):
 ## This will be a conditional statement in a custom function to be sure input is validated.
 ## The built in ".isdigit()" function checks wheter positive integer value is used.
 def validate_calc_completion_percent():
-    if input_attempts.isdigit() and input_complete.isdigit(): #both inputs have to be positive digits
-        if (int(input_attempts) > 0) and (int(input_complete) > 0): #executing if both inputs greater than 0
-            return_completion_percent = calc_completion_percent(int(input_complete), int(input_attempts))
-            print(return_completion_percent)
-        elif (int(input_attempts) == 0) or (int(input_complete) == 0): #catching any zero values
-            print('All values must be greater than 0!\n') 
-    else: #catching any non positive integers
-        error_message()
+        if input_attempts.isdigit() and input_complete.isdigit(): #both inputs have to be positive digits
+            if (int(input_attempts) > 0) and (int(input_complete) > 0): #executing if both inputs greater than 0
+                return_completion_percent = calc_completion_percent(int(input_attempts), int(input_complete))
+                print(return_completion_percent)
+                # return(type(return_completion_percent))
+            elif (int(input_attempts) == 0) or (int(input_complete) == 0): #catching any zero values
+                print('All values must be greater than 0!') 
+        else: #catching any other invalid output"
+            error_message()
 
 
 ## Calling this function runs the program once.
