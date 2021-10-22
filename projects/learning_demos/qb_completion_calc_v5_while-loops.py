@@ -1,14 +1,26 @@
 ## Program to calculate completion percentage of a quarterback
 ## Stitched together by: gtihub.com/ctalaveraw
 
-## v4 implements error handing with try except.
-## This is for input validation so only values that make sense can be provided.
+## v5 implements while loops.
+## The result of this is having the prgram run endlessly.
+##
+## Issues:
+## - Out of bounds values can be entered, such as a 300% completion percentage
+## - Exiting program still shows error message for the input.
 
+
+
+## Begin program
+
+## Global variables are defined here
+continue_message = str('Tap any key!\n')
+terminate_program = str('exit')
+input_attempts = ''
+input_complete = ''
 
 ## A function representing the continue message will be created.
-def continue_message():
-    message = str('Tap any key to continue.\n')
-    input(message)
+def continue_program():
+    input(continue_message)
 ## A function for displaying error messages.
 def error_message():
     message = print('Invalid value!\nOnly whole numbers greater than 0 allowed!')
@@ -17,13 +29,11 @@ def error_message():
 ## This block introduces the user to the program.
 print('\nHello user!\n')
 print('\n\nWelcome to this hastily-made QB completion percentage calculator')
-print('Release v4.0 - using error handling.')
+print('Release v5.0 - using while loops.')
 print('I hope you like American football!\n')
-continue_message()
+print(f'Type "{terminate_program}" for both inputs at any time to {terminate_program} the program.')
+continue_program()
 
-## Now two seperate input statements, stored in variables, will be created to store the data
-input_attempts = input('Please enter the total number of attempted passes:\n')
-input_complete = input('Please enter the total number of completed passes:\n')
 
 
 ## A function will be created, with two parameters representing the input data to be passed along.
@@ -51,15 +61,14 @@ def validate_calc_completion_percent():
     else: # If no exceptions occured, displays a success message
         print('\nSuccess!')    
     finally: # Thanks the user for running the program regardless of exception occurance
-        print('Thank you for using this QB completion % calculator!')
+        print('QB completion % calculator has finished running!\n')
 
-
-## Calling this function runs the program once.
-validate_calc_completion_percent()
-
+## This runs the program indefinitly unless "exit" is typed for both inputs
+while (input_attempts != terminate_program) and (input_complete != terminate_program):
+    input_attempts = input('Please enter the total number of attempted passes:\n')
+    input_complete = input('Please enter the total number of completed passes:\n')
+    validate_calc_completion_percent()
 
 
 ## End of program.
-input('\nPress any key to exit.\n')
-
-## Issues with this program, is that out of bounds values can be entered, such as a 300% completion percentage
+input(f'The program will now {terminate_program}.\n{continue_message}')
