@@ -37,7 +37,7 @@ continue_program()
 
 
 ## A function will be created, with two parameters representing the input data to be passed along.
-def calc_completion_percent(completion, attempt):
+def calc_completion_percent(attempt, completion):
         completion_percentage = float((completion / attempt) * 100)
         return(f'Out of {attempt} balls, {completion} were caught, completing {completion_percentage}% of throws.')
         
