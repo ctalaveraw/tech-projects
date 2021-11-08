@@ -1,0 +1,29 @@
+Metadata-Version: 2.1
+Name: 11-jiffy-calc-v5
+Version: 5.0.0
+Summary: A simple "jiffy to unit" time conversion calculator
+Home-page: http://github.com/ctalaveraw
+Author: ctalaveraw
+Author-email: ctalaveraw@gmail.com
+License: LICENSE.md
+Platform: UNKNOWN
+License-File: LICENSE.md
+
+
+# README
+
+This is a basic unit conversion calculator that takes a number, as well as a supported unit and convert from Jiffy to another unit.
+
+  
+
+Features:
+
+
+ - Error catching
+- Input validation
+- Usage of lists and loops
+- Exit program with keyword
+
+
+Learned how to make a package from [here](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html).
+

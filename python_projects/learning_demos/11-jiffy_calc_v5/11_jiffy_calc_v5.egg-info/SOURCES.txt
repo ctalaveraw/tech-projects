@@ -1,0 +1,15 @@
+LICENSE.md
+README.md
+jiffy_calc_v5
+setup.py
+11_jiffy_calc_v5.egg-info/PKG-INFO
+11_jiffy_calc_v5.egg-info/SOURCES.txt
+11_jiffy_calc_v5.egg-info/dependency_links.txt
+11_jiffy_calc_v5.egg-info/top_level.txt
+jiffy_calc/_init_.py
+jiffy_calc/check.py
+jiffy_calc/error_messages.py
+jiffy_calc/global_var.py
+jiffy_calc/intro.py
+jiffy_calc/main.py
+jiffy_calc/run.py

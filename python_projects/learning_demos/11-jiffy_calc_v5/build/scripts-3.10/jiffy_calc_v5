@@ -1,0 +1,5 @@
+#!python
+
+echo "A stiched-together \
+'Jiffy Calculator', compressed into a singular 'pip'\
+package, which can be shared"
