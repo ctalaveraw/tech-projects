@@ -1,0 +1,14 @@
+/*
+Sensitive/deployment specific values are stored in the *.tfvars file
+
+Copy this into the root deployment Terraform deployment directory
+*/
+
+## These store the access keys for the AWS account; this should not have public access
+aws_secret_key = "INSERT_SECRET_KEY_HERE"
+aws_access_key = "INSERT_ACCESS_KEY_HERE"
+
+## These point to the path of the EC2 instance's SSH keys
+aws_ssh_key_public_k8s_demo = "PUT_PUBLIC_KEY_PATH_HERE"
+aws_ssh_key_private_k8s_demo = "PUT_PRIVATE_KEY_PATH_HERE"
+
