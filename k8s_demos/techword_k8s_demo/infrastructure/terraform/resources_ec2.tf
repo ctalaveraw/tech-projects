@@ -16,7 +16,8 @@ resource "aws_network_interface" "k8s_demo_network_interface" {
 
 ## An EC2 instance for the "k8s demo app will be created
 resource "aws_instance" "k8s_demo_web_server" {
-  ami                         = data.aws_ami.amazon-linux-2.id
+  # ami                         = data.aws_ami.amazon-linux-2.id
+  ami                         = "ami-0b0ea68c435eb488d"
   availability_zone           = "us_east_1a"
   subnet_id                   = aws_subnet.k8s_demo_subnet_public_1.id
   vpc_security_group_ids      = ["${aws_security_group.k8s_demo_security_group.id}"]

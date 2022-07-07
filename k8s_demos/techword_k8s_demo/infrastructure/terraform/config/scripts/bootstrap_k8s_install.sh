@@ -1,53 +1,80 @@
 #!/bin/bash
 
-## This script will bootstrap an Apache webserver
-## It will host the Lambda app static webpage
+## This script will bootstrap an Kubernetes cluster
+
 
 ## Don't run until instance is fully up
+echo "Please wait for EC2 to fully initialize..."
 sleep 5m
+
 ## Run OS updates
-yum update -y
+echo "--Running Ubuntu OS updates--"
+sudo apt-get update -y
 
-## Install Apache webserver
-yum install -y httpd
+## Install Docker dependencies
+echo "--Installing Docker dependencies--"
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
 
-## Setting an enviornmental variable to store IP
-MYIP=$(dig +short myip.opendns.com @resolver1.opendns.com)
+## Downloading Docker public signing key
+echo "--Downloading Docker GPG Key--"
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
-## Create the index.html homepage
-echo "<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Fortune Frontend</title>
-</head>
-<! The above 'head' block contains formatting information>
+## Add Docker repo
+echo "--Adding Docker 'apt' repository--"
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update -y
 
-<body>
-    <h2>Your fortune is:</h2>
-    <p id='fortune'>Loading...</p>
-    <p>Version 0.2</p>
-    <script>
-    fetch('http://random-fortune-alb-214753831.us-east-1.elb.amazonaws.com/').then(resp => resp.json()).then(data => {
-        document.getElementById('fortune').innerText = data['fortune']
-    });
-    </script>
-<! The 'script' block represents client-side JavaScript to be run>
-</body>
-</html>
+## Install Docker Engine
+echo "--Installing Docker Engine--"
+sudo apt-get install -y \
+    docker-ce \
+    docker-ce-cli \
+    containerd.io \
+    docker-compose-plugin
 
-<script>
-// the lambda url is dependent upon exercise_1 deployment to get the URL of the associated ALB
-</script>" > /var/www/html/index.html
+## Start Docker
+echo "--Starting Docker--"
+sudo groupadd docker
+sudo usermod -aG docker $USER
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
+sudo systemctl start docker.service
+sudo systemctl start containerd.service
 
-## Adding the IP to the created webpage
-echo "<body>
-    <h2>You are currently behind an ALB (Application Load Balancer)!</h2>
-    <strong> The IP of this server is: </strong>
-</body>" "$MYIP" >> /var/www/html/index.html
-## Start the Apache system service
-systemctl start httpd
 
-## Enable the Apache system service
-systemctl enable httpd
+## Install Kubernetes dependencies
+echo "--Installing Kubernetes dependencies--"
+sudo apt-get install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
+
+## Downloading K8s public signing key
+echo "--Downloading K8s GPG Key--"
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
+
+## Add K8s repo
+echo "--Adding Kubnernetes 'apt' repository--"
+echo \
+    "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | \
+    sudo tee /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update -y
+
+## Install k8s
+echo "--Installing Kubernetes--"
+sudo apt-get install -y \
+kubelet \
+kubeadm \
+kubectl \
+kubernetes-cni
+
