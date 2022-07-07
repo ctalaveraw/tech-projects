@@ -2,10 +2,10 @@
 ## The 'launch configuration' needs to be defined
 resource "aws_launch_configuration" "k8s_demo_launch_config" {
   name            = "k8s_demo_launch_config"
-  image_id        = data.aws_ami.amazon_linux_2.id
+  image_id        = data.aws_ami.amazon-linux-2.id
   instance_type   = "t2.micro"
   security_groups = ["${aws_security_group.k8s_demo_security_group.id}"]
-  key_name        = aws_key_pair.fortune_keypair.key_name
+  key_name        = aws_key_pair.k8s_demo_keypair.key_name
   user_data       = file("./config/scripts/bootstrap_k8s_install.sh")
 }
 
@@ -41,9 +41,6 @@ resource "aws_autoscaling_policy" "cpu_overuse_policy_scaleup" {
   scaling_adjustment     = 1
   cooldown               = 300
   policy_type            = "SimpleScaling"
-  tags = {
-    name = "k8s_demo"
-  }
 }
 
 
@@ -55,10 +52,7 @@ resource "aws_autoscaling_policy" "cpu_overuse_policy_scaledown" {
   name                   = "cpu_overuse_policy_scaledown"
   autoscaling_group_name = aws_autoscaling_group.k8s_demo_group_autoscale.name
   adjustment_type        = "ChangeInCapacity"
-  scaling_adjustment     = _1
+  scaling_adjustment     = 1
   cooldown               = 60
   policy_type            = "SimpleScaling"
-  tags = {
-    name = "k8s_demo"
-  }
 }

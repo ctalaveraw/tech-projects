@@ -25,13 +25,13 @@ variable "aws_secret_key" {
 A variable will need to be created to represent paths to the SSH key
 for the created EC2 instance
 */
-variable "aws_ssh_key_public_fortune" {
+variable "aws_ssh_key_public_k8s_demo" {
   description = "Public SSH key for the created EC2 instance"
   type        = string
 }
 
 
-variable "aws_ssh_key_private_fortune" {
+variable "aws_ssh_key_private_k8s_demo" {
   description = "Private SSH key for the created EC2 instance"
   type        = string
 }

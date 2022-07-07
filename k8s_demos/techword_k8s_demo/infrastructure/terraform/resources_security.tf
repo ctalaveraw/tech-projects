@@ -41,4 +41,7 @@ resource "aws_security_group" "k8s_demo_security_group" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    name = "techworld_k8s_demo"
+  }
 }
