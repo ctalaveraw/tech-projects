@@ -18,7 +18,7 @@ resource "aws_network_interface" "k8s_demo_network_interface" {
 resource "aws_instance" "k8s_demo_web_server" {
   # ami                         = data.aws_ami.amazon-linux-2.id
   ami                         = "ami-0b0ea68c435eb488d"
-  availability_zone           = "us_east_1a"
+  availability_zone           = "us-east-1a"
   subnet_id                   = aws_subnet.k8s_demo_subnet_public_1.id
   vpc_security_group_ids      = ["${aws_security_group.k8s_demo_security_group.id}"]
   instance_type               = "t2.micro"
@@ -44,6 +44,6 @@ resource "aws_instance" "k8s_demo_web_server" {
     type        = "ssh"
     host        = coalesce(self.public_ip, self.private_ip)
     user        = var.instance_username
-    private_key = file(var.aws_ssh_key_private_k8s_demo)
+    private_key = file(pathexpand(var.aws_ssh_key_private_k8s_demo))
   }
 }

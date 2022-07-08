@@ -6,7 +6,7 @@ resource "aws_vpc" "k8s_demo_vpc" {
   enable_dns_support   = true
   enable_dns_hostnames = true
   tags = {
-    Name = "k8s_demo_vpc"
+    Name = "k8s_demo"
   }
 }
 
@@ -14,11 +14,11 @@ resource "aws_vpc" "k8s_demo_vpc" {
 resource "aws_subnet" "k8s_demo_subnet_public_1" {
   vpc_id                  = aws_vpc.k8s_demo_vpc.id
   map_public_ip_on_launch = true
-  availability_zone       = "us_east_1a"
+  availability_zone       = "us-east-1a"
   cidr_block              = "10.0.0.0/24"
 
   tags = {
-    Name = "k8s_demo_webapp_public_1"
+    Name = "k8s_demo"
   }
 }
 
@@ -28,10 +28,10 @@ resource "aws_subnet" "k8s_demo_subnet_public_2" {
   vpc_id                  = aws_vpc.k8s_demo_vpc.id
   map_public_ip_on_launch = true
   cidr_block              = "10.0.2.0/24"
-  availability_zone       = "us_east_1b"
+  availability_zone       = "us-east-1b"
 
   tags = {
-    Name = "k8s_demo_webapp_public_2"
+    Name = "k8s_demo"
   }
 }
 
@@ -40,7 +40,7 @@ resource "aws_subnet" "k8s_demo_subnet_private_1" {
   vpc_id                  = aws_vpc.k8s_demo_vpc.id
   map_public_ip_on_launch = true
   cidr_block              = "10.0.3.0/24"
-  availability_zone       = "us_east_1a"
+  availability_zone       = "us-east-1a"
 
   tags = {
     name = "k8s_demo"

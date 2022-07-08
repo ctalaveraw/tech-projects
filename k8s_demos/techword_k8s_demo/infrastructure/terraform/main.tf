@@ -14,6 +14,6 @@ This will be done via a private *.tfvars file when executing deployment
 # Provider block; keys are defined here
 provider "aws" {
   region     = "us-east-1"
-  secret_key = var.aws_secret_key
-  access_key = var.aws_access_key
+  secret_key = var.aws_secret_access_key
+  access_key = var.aws_access_key_id
 }

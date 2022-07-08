@@ -1,8 +1,9 @@
 
 ## The 'launch configuration' needs to be defined
 resource "aws_launch_configuration" "k8s_demo_launch_config" {
-  name            = "k8s_demo_launch_config"
-  image_id        = data.aws_ami.amazon-linux-2.id
+  name = "k8s_demo_launch_config"
+  # image_id                         = data.aws_ami.amazon-linux-2.id
+  image_id        = "ami-0b0ea68c435eb488d"
   instance_type   = "t2.micro"
   security_groups = ["${aws_security_group.k8s_demo_security_group.id}"]
   key_name        = aws_key_pair.k8s_demo_keypair.key_name

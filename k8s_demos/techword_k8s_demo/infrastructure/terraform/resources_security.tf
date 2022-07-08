@@ -1,7 +1,7 @@
 ## SSH key pair for the instance will be created to SSH for running bootstrap
 resource "aws_key_pair" "k8s_demo_keypair" {
   key_name   = "k8s_demo_keypair"
-  public_key = file(var.aws_ssh_key_public_k8s_demo)
+  public_key = file(pathexpand(var.aws_ssh_key_public_k8s_demo))
 
 }
 
